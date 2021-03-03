@@ -3,7 +3,7 @@
 set -e
 
 bash _scripts/make-dist.sh
-mkdocs build
+#mkdocs build
 
 SITE_BUCKET=s3://docs.opendata.aws/genomics-workflows
 ASSET_BUCKET=s3://aws-genomics-workflows
