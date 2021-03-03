@@ -93,32 +93,30 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: SG for genomics workflows on Batch
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0   
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: udp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0 
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: udp          
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0   
       VpcId:
         Ref: VpcId
-  SGSSHIngress:
-    Type: AWS::EC2::SecurityGroupIngress
-    Properties:
-      GroupId: !Ref SecurityGroup
-      IpProtocol: tcp
-      FromPort: 22
-      ToPort: 22
-      CidrIp: 0.0.0.0/0
-  SGAllTcpEgress:
-    Type: AWS::EC2::SecurityGroupEgress
-    Properties:
-      GroupId: !Ref SecurityGroup
-      IpProtocol: tcp
-      FromPort: 0
-      ToPort: 65535
-      CidrIp: 0.0.0.0/0
-  SGAllTcpSelfIngress:
-    Type: AWS::EC2::SecurityGroupIngress
-    Properties:
-      GroupId: !Ref SecurityGroup
-      IpProtocol: tcp
-      FromPort: 0
-      ToPort: 65535
-      SourceSecurityGroupId: !Ref SecurityGroup
 
   SpotComputeEnv:
     Type: AWS::Batch::ComputeEnvironment
