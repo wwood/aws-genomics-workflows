@@ -219,8 +219,6 @@ Resources:
       ComputeEnvironmentOrder:
         - Order: 1
           ComputeEnvironment: !Ref SpotComputeEnv
-        - Order: 2
-          ComputeEnvironment: !Ref OnDemandComputeEnv
 
   ContainerInstanceLogGroup:
     Type: AWS::Logs::LogGroup
